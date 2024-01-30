@@ -356,9 +356,12 @@ const (
 )
 
 func (w *Watcher) newEvent(name string, mask uint32) Event {
-	e := Event{Name: name}
+	e := Event{Name: name, IsFSMoveto: false}
 	if mask&sysFSCREATE == sysFSCREATE || mask&sysFSMOVEDTO == sysFSMOVEDTO {
 		e.Op |= Create
+		if mask&sysFSMOVEDTO == sysFSMOVEDTO {
+			e.IsFSMoveto = true
+		}
 	}
 	if mask&sysFSDELETE == sysFSDELETE || mask&sysFSDELETESELF == sysFSDELETESELF {
 		e.Op |= Remove

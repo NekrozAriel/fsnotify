@@ -30,6 +30,8 @@ type Event struct {
 	// This is a bitmask and some systems may send multiple operations at once.
 	// Use the Event.Has() method instead of comparing with ==.
 	Op Op
+
+	IsFSMoveto bool
 }
 
 // Op describes a set of file operations.
